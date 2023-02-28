@@ -1,4 +1,27 @@
 ---
+import '../style/global.css';
+import Persona from '../components/Persona.astro';
+import Block from '../components/Block.astro';
+
+const blocks = [
+	{
+		name: 'Formación',
+		table: 'education'
+	},
+	{
+		name: "Experiencia Laboral",
+		table: "jobs"
+	},
+	{
+		name : "Proyectos",
+		table: "projects",
+	},
+	{
+		name: "Proyectos paralelos",
+		table: 'side'
+	}
+];
+
 ---
 
 <html lang="en">
@@ -7,9 +30,175 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Jose Ochoa</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<main>
+			<div class="cv">
+				<div class="cv-sidebar"> 
+					<h1>José Ochoa</h1>
+					<h2>Datos Personales</h2>
+					<Persona />
+	
+					<h2>Habilidades</h2>
+					<ul>
+						<li>HTML</li>
+						<li>
+							<span>CSS</span>
+							<ul>
+								<li>SASS</li>
+								<li>LESS</li>
+								<li>Stylus</li>
+								<li>Tailwind</li>
+							</ul>
+						</li>
+						<li>
+							<span>PHP</span>
+							<ul>
+								<li>Laravel</li>
+								<li>Wordpress</li>
+								<li>Woocommerce</li>
+								<li>Codeigniter</li>
+								<li>Lumen</li>
+								<li>Slim</li>
+							</ul>	
+						</li> 
+						<li>
+							<span>Javascript</span>
+							<ul>
+								<li>jQuery</li>
+								<li>Angular 1</li>
+								<li>Typescript</li>
+								<li>Node.js</li>
+								<li>React</li>
+								<li>Astro</li>
+								<li>Express.js</li>
+								<li>Next</li>
+								<li>Electron</li>
+							</ul>
+						</li>
+						<li>SVG</li>
+						<li>JSON</li>
+						<li>XML</li>
+						<li>Java</li>
+						<li>Jekyll</li>
+						<li>Python</li>
+						<li>Base de datos</li>
+						<li>Scraping</li>
+						<li>Responsividad</li>
+						<li>Astro</li>
+						<li>CI/CD</li>
+						<li>
+							<span>Servidor web</span>
+							<ul>
+								<li>NGINX</li>
+								<li>Apache</li>
+							</ul>
+						</li>
+						<li>APIs</li>
+						<li>Newsletters</li>
+						<li>Automatización</li>
+	
+						<li>Discord bot</li>
+						<li>Telegram bot</li>
+					</ul> 
+	
+					<h2>Idiomas</h2>
+					<ul>
+						<li>Español</li>
+						<li>Inglés</li>
+					</ul>
+	
+					<h2>Herramientas</h2>
+					<p>
+						Gulp, VSCode, PHPStorm, Git, Jade (Pug), ssh, markdown, npm, jq, MJML, Phaser, Firefox, Brisk,...
+					</p>
+	
+					<h2>Servicios</h2>
+					<p>Gitlab, Github, Azure, Clockify, Toggl, Netlify, Strapi, Airtable, Lambda, Pipedream,...</p>
+	
+					<h2>En curso</h2>
+					<ul>
+						<li>Svelte</li>
+						<li>Vue</li>
+						<li>Alpinejs</li>
+					</ul>
+				</div>
+				<div class="cv-content">
+					<div class="cv-content-inner">
+						<p>Desarrollador de software con 10 años de experiencia en la maquetación, desarrollo, programación y testeo de sistemas web y escritorio. Implementa soluciones a medida dependiendo de los requerimientos del cliente, sugiriendo ideas para el deasrrollo del proyecto. Habilidades avanzadas en lenguajes de programación web, y procesamiento de data. </p>
+
+
+						{blocks.map(block => <Block table={block.table} title={block.name}></Block>)}
+					</div>
+				</div>
+			</div>
+		</main>
+		<style>
+		.cv { 
+			margin: 0 auto;
+			display: flex;
+			width: 100%; 
+			height: 100px;
+			height: auto;
+			min-height: 100vh;
+			justify-content: center;
+		}  
+		.cv > div {
+			width: 100%;
+		}
+		.cv-sidebar {
+			max-width: 25em; 
+			position: relative; 
+			color: white;
+			padding: 1em;
+		} 
+		.cv-sidebar:before {
+			background-color: rgb(41, 79, 136);
+			content: '';
+			position: absolute;
+			top: 0;
+			width: 100vw;
+			bottom: 0;
+			z-index: -1;
+			right: 0;
+			box-shadow: -1em 0 2em 2em #0009;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+			box-shadow: rgb(41, 79, 136) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+		}
+		.cv-content {
+			max-width: 50em;
+			padding: 1em;
+			padding-left: 3em;
+		} 		
+		@page { 
+			size: auto;
+			margin: 0;
+			padding: 0;
+		}
+		@media print {
+			body {
+				-webkit-print-color-adjust:exact !important;
+  				print-color-adjust:exact !important;
+				margin: 0;
+				padding: 0; 
+			}
+			.cv-sidebar:before {
+				background-color: none;
+				box-shadow: none;
+			}
+			.cv-sidebar {
+				background-color: rgb(41, 79, 136);
+				max-width: 16em; 
+			}
+			.cv-content-inner {
+				padding-right: 2em;
+			}
+		}
+		</style>
 	</body>
 </html>

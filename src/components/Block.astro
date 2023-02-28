@@ -1,0 +1,73 @@
+---
+import { readFile } from 'node:fs/promises';
+
+let { title, table } = Astro.props;
+
+let items = await readFile(`./data/${table}.json`);
+
+items = JSON.parse(items.toString());
+items = items.records; 
+
+---
+
+<div class="block">
+    <h2 class="block-title">{ title }</h2>
+
+    {items.map(item => {
+        let Tag = table == 'jobs' ? 'div' : 'a';
+        return <div class="block-item">
+            <h3 class="block-item-title">
+                <Tag href={item.fields.link ?? '#'} target={item.fields.link ? '_blank' : ''}>{item.fields.name}</Tag> 
+                <small>{item.fields.date_start} {item.fields.date_end ? (' – ' + item.fields.date_end) : ''  }</small>
+            </h3>
+            <div class="block-item-"><i>{item.fields.client}</i></div> 
+            <p class="block-item-description" set:html={item.fields.description?.replace(/\n/g, "<br>")}></p>
+        </div>
+    })}
+</div> 
+ 
+<style>
+.block { 
+    margin-top: 3rem;
+    padding-top: 3rem; 
+    border-top: 1px solid rgba(0,0,0,0.05);
+} 
+.block-title {
+    margin-top: 0; 
+}
+.block-item-title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.block-item-title small {
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+.block-item-title a::after,
+.block-item-title a:hover::after {
+    -webkit-filter: none;
+    filter: none;
+}
+.block-item-caption {
+
+}
+.block-item-description {
+    margin-top: 0.5rem;
+}
+
+.block-item:hover .block-item-title:before {
+    content: ">";
+    position: absolute;
+    left: -1rem;
+}
+.block-item:hover .block-item-title:after {
+    content: "<";
+
+    position: absolute; 
+    right: -1rem;
+}
+
+</style>

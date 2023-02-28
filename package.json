@@ -10,6 +10,8 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"astro": "^2.0.14"
+		"astro": "^2.0.14",
+		"dotenv": "^16.0.3",
+		"node-fetch": "^3.3.0"
 	}
 }
